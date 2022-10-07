@@ -21,43 +21,14 @@ resource "aws_iam_policy" "deployer_policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Effect" : "Allow",
-      "Action" : [
-        "codedeploy:CreateDeployment"
-      ],
-      "Resource" : [
-        "arn:aws:codedeploy:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:deploymentgroup:${aws_codedeploy_app.app.name}/*"
-      ]
-    },
-    {
-      "Effect" : "Allow",
-      "Action" : [
-        "codedeploy:GetDeploymentConfig"
-      ],
-      "Resource" : [
-        "arn:aws:codedeploy:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:deploymentconfig:*"
-      ]
-    },
-    {
-      "Effect" : "Allow",
-      "Action" : [
-        "codedeploy:GetApplicationRevision"
-      ],
-      "Resource" : [
-        "arn:aws:codedeploy:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application:${aws_codedeploy_app.app.name}"
-      ]
-    },
-    {
-      "Effect" : "Allow",
-      "Action" : [
-        "codedeploy:RegisterApplicationRevision"
-      ],
-      "Resource" : [
-        "arn:aws:codedeploy:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:application:${aws_codedeploy_app.app.name}"
-      ]
+      "Sid": "",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "codedeploy.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
     }
   ]
 }
 EOF
-
 }
